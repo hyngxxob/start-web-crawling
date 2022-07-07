@@ -16,7 +16,7 @@ for image in images :
     image.click()
     time.sleep(3)
     imgUrl = driver.find_element(By.CSS_SELECTOR, ".n3VNCb.KAlRDb").get_attribute("src")
-    # urllib.request.urlretrieve(imgUrl, str(count) + ".jpg")
+    urllib.request.urlretrieve(imgUrl, str(count) + ".jpg")
     # count += 1
 # assert "Python" in driver.title
 # elem = driver.find_element(By.NAME, "q")
