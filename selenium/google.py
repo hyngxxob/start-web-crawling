@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 import urllib.request
+from urllib.request import Request, urlopen
 
 driver = webdriver.Chrome()
 driver.get("https://www.google.co.kr/imghp?hl=ko&ogbl")
@@ -14,10 +15,15 @@ images = driver.find_elements(By.CSS_SELECTOR, ".rg_i.Q4LuWd")
 count = 1
 for image in images :
     image.click()
-    time.sleep(3)
-    imgUrl = driver.find_element(By.CSS_SELECTOR, ".n3VNCb.KAlRDb").get_attribute("src")
-    # urllib.request.urlretrieve(imgUrl, str(count) + ".jpg")
-    # count += 1
+    time.sleep(2)
+    imgUrl = driver.find_element(By.CSS_SELECTOR, "img.n3VNCb.KAlRDb").get_attribute("src")
+    print(imgUrl)
+
+    opener = urllib.request.build_opener()
+    opener.addheaders = [('User-Agent','Chrome/103.0.5060.114')]
+    urllib.request.install_opener(opener)
+    urllib.request.urlretrieve(imgUrl, f"./img/{str(count)}.jpg")
+    count = count + 1
 # assert "Python" in driver.title
 # elem = driver.find_element(By.NAME, "q")
 # elem.clear()
